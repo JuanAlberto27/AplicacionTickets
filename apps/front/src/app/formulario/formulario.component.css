@@ -1,7 +1,7 @@
 #formulario {
     text-align: center;
     height: 700px;
-    background: linear-gradient(to right, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202));
+    background: linear-gradient(to bottom, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202));
     margin: 0 40%;
     border-radius: 10%;
     padding: 20px;
@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 10px 10px 30px gray;
 }
 
 label {
@@ -17,7 +18,7 @@ label {
 }
 
 #botonEnviar {
-    background-color: rgb(197, 255, 246);
+    background-color: rgb(255, 255, 255);
     border-radius: 30%;
     padding: 12px;
     box-shadow: 10px 0px 50px rgb(119, 141, 131);
@@ -25,7 +26,10 @@ label {
 }
 
 #botonEnviar:hover {
-    background-color: rgb(166, 215, 208);
+    background-color: rgb(228, 228, 228);
+    transform: scale(1.1);
+    transition: 500ms ease-in;
+    cursor: pointer;
 }
 
 .error {
