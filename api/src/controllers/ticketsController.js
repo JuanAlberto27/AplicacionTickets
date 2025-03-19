@@ -1,33 +1,33 @@
-const { error } = require('console');
+const { err } = require('console');
 const db = require('../database/conexion.js');
 
-class TicketsController 
+class ticketsController 
 {
     constructor() {}
 
-    ingresar(req,res)
+    ingresar(req, res) 
     {
-        try 
+        try
         {
-            db.query('INSERT INTO tickets (idTicket, asunto, titulo, descripcion,tipoIncidencia,estadoTrabajo,fechaInicio,fechaFin,notas)VALUES(?,?,?,?,?,?,?,?,?);',
-
-                [idTicket, asunto, titulo, descripcion,tipoIncidencia,estadoTrabajo,fechaInicio,fechaFin,notas],(err, rows) => 
+            const { idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas } = req.body;
+            db.query(
+                'INSERT INTO ticket (idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?,?,?)',
+                [idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
+                (err, rows) => 
                 {
-                    if (error) 
+                    if (err) 
                     {
-                        res.status(400).send(error)
-                    } 
-                    else 
-                    {
-                        res.status(201).json(rows);
+                        return res.status(400).send(err);
                     }
-                });
-        } 
-        catch (error) 
-        {
-            res.status(500).send(error);            
+                    res.status(201).json({ id: rows.insertId, msg: 'Ticket ingresado' });
+                }
+            );     
         }
-        res.json({ msg: 'Ingresa tickets desde clase' });
+        catch (err) 
+        {
+            res.status(500).json(err.message);            
+        }
     }
-
 }
+
+module.exports = new ticketsController();
