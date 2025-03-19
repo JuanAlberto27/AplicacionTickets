@@ -9,10 +9,11 @@ class ticketsController
     {
         try
         {
-            const { idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas } = req.body;
-            db.query(
-                'INSERT INTO ticket (idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?,?,?)',
-                [idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
+            const { titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaFin, notas } = req.body;
+            const fechaInicio = new Date(); 
+
+            db.query('INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
+                [titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
                 (err, rows) => 
                 {
                     if (err) 
@@ -32,11 +33,12 @@ class ticketsController
         }
     }
 
+
     mostrarTickets(req, res) 
     {
         try 
         {
-            db.query('SELECT * FROM ticket', (err, rows) => 
+            db.query('SELECT * FROM ticket ORDER BY fechaInicio DESC', (err, rows) => 
             {
                 if (err) 
                 {

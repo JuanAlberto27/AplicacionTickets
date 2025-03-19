@@ -9,10 +9,10 @@ class usuarioController
     {
         try
         {
-            const { idUsuario, nombre, apellidos, correo, tipoUsuario } = req.body;
+            const {nombre, apellidos, correo, tipoUsuario } = req.body;
             db.query(
-                'INSERT INTO usuario (idUsuario, nombre, apellidos, correo, tipoUsuario) VALUES (null,?,?,?,?)',
-                [idUsuario, nombre, apellidos, correo, tipoUsuario],
+                'INSERT INTO usuario (nombre, apellidos, correo, tipoUsuario) VALUES (?,?,?,?)',
+                [nombre, apellidos, correo, tipoUsuario],
                 (err, rows) => 
                 {
                     if (err) 

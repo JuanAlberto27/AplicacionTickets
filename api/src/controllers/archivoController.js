@@ -12,7 +12,7 @@ class archivoController
             const { idTicket, nombreArchivo, urlArchivo, tipoArchivo } = req.body;
             db.query(
                 'INSERT INTO archivo (idTicket, nombreArchivo, urlArchivo, tipoArchivo) VALUES (?,?,?,?)',
-                [idArchivo, idTicket, nombreArchivo, urlArchivo, tipoArchivo],
+                [idTicket, nombreArchivo, urlArchivo, tipoArchivo],
                 (err, rows) => 
                 {
                     if (err) 
