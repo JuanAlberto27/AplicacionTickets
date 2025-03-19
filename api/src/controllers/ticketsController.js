@@ -5,38 +5,25 @@ class ticketsController
 {
     constructor() {}
 
-    ingresarTicket(req, res) 
-    {
-        try
-        {
-<<<<<<< HEAD
+    ingresarTicket(req, res) {
+        try {
             const { titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaFin, notas } = req.body;
-            const fechaInicio = new Date(); 
-
-            db.query('INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
-                [titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
-=======
-            const { idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas } = req.body;
+    
+            const fechaInicio = new Date();
+    
             db.query(
-                'INSERT INTO ticket (idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?,?)',
-                [idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
->>>>>>> 0b397f5c697988140265c499d262e5b02626c1a9
-                (err, rows) => 
-                {
-                    if (err) 
-                    {
+                'INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
+                [titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
+                (err, rows) => {
+                    if (err) {
                         return res.status(400).send(err);
-                    }
-                    else
-                    {
+                    } else {
                         res.status(201).json({ id: rows.insertId, msg: 'Ticket ingresado' });
-                    }                    
+                    }
                 }
-            );     
-        }
-        catch (err) 
-        {
-            res.status(500).json(err.message);            
+            );
+        } catch (err) {
+            res.status(500).json(err.message);
         }
     }
 
