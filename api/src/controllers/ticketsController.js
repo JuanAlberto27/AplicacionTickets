@@ -9,18 +9,11 @@ class ticketsController
     {
         try
         {
-<<<<<<< HEAD
             const { titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaFin, notas } = req.body;
             const fechaInicio = new Date(); 
 
             db.query('INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
                 [titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
-=======
-            const { idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas } = req.body;
-            db.query(
-                'INSERT INTO ticket (idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?,?)',
-                [idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
->>>>>>> 0b397f5c697988140265c499d262e5b02626c1a9
                 (err, rows) => 
                 {
                     if (err) 
