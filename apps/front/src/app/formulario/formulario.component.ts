@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css',
 })
+
 export class FormularioComponent {
 
   formu = new FormGroup({
@@ -29,5 +30,4 @@ export class FormularioComponent {
     }
   }
 
-  
 }
