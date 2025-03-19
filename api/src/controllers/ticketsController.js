@@ -19,17 +19,13 @@ class ticketsController
                     if (err) 
                     {
                         return res.status(400).send(err);
-                    }
-                    else
-                    {
+                    } else {
                         res.status(201).json({ id: rows.insertId, msg: 'Ticket ingresado' });
-                    }                    
+                    }
                 }
-            );     
-        }
-        catch (err) 
-        {
-            res.status(500).json(err.message);            
+            );
+        } catch (err) {
+            res.status(500).json(err.message);
         }
     }
 
