@@ -1,0 +1,47 @@
+<div id="formulario">
+    <form [formGroup]="formu" (ngSubmit)="enviar()">
+
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" formControlName="titulo" required>
+        <span *ngIf="formu.get('titulo')?.invalid && formu.get('titulo')?.touched" class="error">El título es obligatorio</span>
+
+        <br><br>
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" formControlName="descripcion" required></textarea>
+        <span *ngIf="formu.get('descripcion')?.invalid && formu.get('descripcion')?.touched" class="error">La descripción es obligatoria</span>
+
+        <br><br>
+
+        <label for="tipo">Tipo de incidencia</label>
+        <select id="tipo" name="tipo" formControlName="tipo" required>
+            <option value="bugs">Bugs o errores</option>
+            <option value="mejora">Solicitudes de mejora</option>
+            <option value="problemas">Problemas de acceso y configuración</option>
+            <option value="soporte">Soporte general y consultas</option>
+            <option value="seguridad">Seguridad</option>
+        </select>
+        <span *ngIf="formu.get('tipo')?.invalid && formu.get('tipo')?.touched" class="error">El tipo es obligatorio</span>
+
+        <br><br>
+
+        <label for="fecha_fin">Fecha estimada de finalización</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" formControlName="fecha_fin" required>
+        <span *ngIf="formu.get('fecha_fin')?.invalid && formu.get('fecha_fin')?.touched" class="error">La fecha de fin estimada es obligatoria</span>
+
+        <br><br>
+
+        <label for="notas">Notas</label>
+        <textarea id="notas" name="notas" formControlName="notas"></textarea> 
+
+        <br><br>
+
+        <label for="imgdocs">Imágenes o documentos</label>
+        <input type="file" id="imgdocs" name="imgdocs" formControlName="imgdocs">
+
+        <br><br>
+
+        <button id="botonEnviar" type="submit" [disabled]="formu.invalid">Crear ticket</button>
+
+    </form>
+</div>

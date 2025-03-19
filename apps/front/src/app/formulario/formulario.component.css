@@ -1,0 +1,36 @@
+#formulario {
+    text-align: center;
+    height: 700px;
+    background: linear-gradient(to right, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202));
+    margin: 0 40%;
+    border-radius: 10%;
+    padding: 20px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#botonEnviar {
+    background-color: rgb(197, 255, 246);
+    border-radius: 30%;
+    padding: 12px;
+    box-shadow: 10px 0px 50px rgb(119, 141, 131);
+    color: black;
+}
+
+#botonEnviar:hover {
+    background-color: rgb(166, 215, 208);
+}
+
+.error {
+    font-size: 15px;
+    color: rgb(171, 0, 0);
+    display: block;
+    margin-top: 10px;
+}

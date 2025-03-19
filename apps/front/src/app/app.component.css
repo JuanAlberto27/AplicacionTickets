@@ -1,0 +1,12 @@
+header {
+    background: linear-gradient(to right, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202) 70%);
+    padding: 10px;
+    color: rgb(5, 31, 78);
+}
+
+#contenedorBoton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
