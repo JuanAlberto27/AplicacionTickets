@@ -5,7 +5,7 @@ class ticketsController
 {
     constructor() {}
 
-    ingresar(req, res) 
+    ingresarTicket(req, res) 
     {
         try
         {
@@ -19,7 +19,10 @@ class ticketsController
                     {
                         return res.status(400).send(err);
                     }
-                    res.status(201).json({ id: rows.insertId, msg: 'Ticket ingresado' });
+                    else
+                    {
+                        res.status(201).json({ id: rows.insertId, msg: 'Ticket ingresado' });
+                    }                    
                 }
             );     
         }
@@ -28,6 +31,56 @@ class ticketsController
             res.status(500).json(err.message);            
         }
     }
+
+    mostrarTickets(req, res) 
+    {
+        try 
+        {
+            db.query('SELECT * FROM ticket', (err, rows) => 
+            {
+                if (err) 
+                {
+                    return res.status(400).json({ error: err.message });
+                }
+                else
+                {
+                    res.status(200).json({ msg: 'Tickets almacenados', tickets: rows });
+                }               
+            });
+        }
+        catch (err) 
+        {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
+    eliminarTickets(req, res) 
+    {
+        try 
+        {
+            const { idTicket } = req.body;
+    
+            db.query('DELETE FROM ticket WHERE idTicket = ?', [idTicket], (err, rows) => 
+            {
+                if (err) 
+                {
+                    return res.status(400).json({ error: err.message });
+                }
+                else if (rows.affectedRows === 0)
+                {
+                    return res.status(404).json({ msg: 'Ticket no encontrado' });
+                }
+                else
+                {
+                    res.status(200).json({ msg: 'Ticket eliminado' });
+                }
+            });
+        } 
+        catch (err)
+        {
+            res.status(500).json({ error: err.message });
+        }
+    }    
 }
 
 module.exports = new ticketsController();
