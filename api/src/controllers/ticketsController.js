@@ -9,10 +9,10 @@ class ticketsController
     {
         try
         {
-            const { idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas } = req.body;
+            const { idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas } = req.body;
             db.query(
-                'INSERT INTO ticket (idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?,?,?)',
-                [idTicket, asunto, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
+                'INSERT INTO ticket (idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?,?)',
+                [idTicket, titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
                 (err, rows) => 
                 {
                     if (err) 
