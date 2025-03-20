@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { TicketsService } from '../services/tickets.service';
+import { Ticket } from '../models/ticket.model';
 
 @Component({
   selector: 'app-formulario',
@@ -11,6 +13,8 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 })
 
 export class FormularioComponent {
+
+  constructor(private ticketsService : TicketsService) {}
 
   formu = new FormGroup({
     titulo: new FormControl('', [Validators.required, Validators.maxLength(23)]),
@@ -23,11 +27,27 @@ export class FormularioComponent {
 
   enviar() {
     if (this.formu.valid) {
-      alert("Ticket creado correctamente.");
+      const ticket: Ticket = {
+        titulo: this.formu.value.titulo!,
+        descripcion: this.formu.value.descripcion!,
+        tipoIncidencia: this.formu.value.tipo as Ticket['tipoIncidencia'],
+        estadoTrabajo: 'pendiente',
+        fechaFin: new Date(this.formu.value.fecha_fin!)
+      };
+
+      this.ticketsService.createTicket(ticket).subscribe(
+        response => {
+          alert('Ticket creado correctamente.');
+          this.formu.reset();
+        },
+        error => {
+          console.error('Error al crear el ticket:', error);
+          alert('Error al crear el ticket.');
+        }
+      );
     } else {
       this.formu.markAllAsTouched();
-      alert("Revise los campos otra vez.");
+      alert('Revise los campos otra vez.');
     }
   }
-
 }

@@ -19,7 +19,7 @@ export class TicketsService {
   };
 
   getTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.apiUrl);
+    return this.http.get<Ticket[]>(`${this.apiUrl}/mostrarTickets`);
   }
 
   getTicket(id: string): Observable<Ticket> {
@@ -28,7 +28,7 @@ export class TicketsService {
   }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.apiUrl, ticket, this.httpOptions);
+    return this.http.post<Ticket>(`${this.apiUrl}/crearTicket`, ticket, this.httpOptions);
   }
 
   updateTicket(id: string, ticket: Ticket): Observable<Ticket> {
