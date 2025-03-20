@@ -7,24 +7,55 @@ class ticketsController
 
     ingresarTicket(req, res) 
     {
-        try
+        try 
         {
-            const { titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaFin, notas } = req.body;
-            const fechaInicio = new Date(); 
+            const { titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaFin, notas, archivo } = req.body;
+            const fechaInicio = new Date();
 
-            db.query('INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
+            // 1. Primero insertar el ticket
+            db.query(
+                'INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
                 [titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
                 (err, rows) => 
                 {
-                    if (err) 
+                    if (err)
                     {
                         return res.status(400).send(err);
-                    } else {
-                        res.status(201).json({ id: rows.insertId, msg: 'Ticket ingresado' });
                     }
+
+                    const idTicket = rows.insertId;
+
+                    // 2. Si no viene archivo, solo responder
+                    if (!archivo) 
+                    {
+                        return res.status(201).json({ id: idTicket, msg: 'Ticket ingresado sin archivo' });
+                    }
+
+                    // 3. Si viene archivo, guardarlo
+                    const { nombreArchivo, urlArchivo, tipoArchivo } = archivo;
+
+                    db.query(
+                        'INSERT INTO archivo (idTicket, nombreArchivo, urlArchivo, tipoArchivo) VALUES (?,?,?,?)',
+                        [idTicket, nombreArchivo, urlArchivo, tipoArchivo],
+                        (errArchivo, rowsArchivo) => 
+                        {
+                            if (errArchivo) 
+                            {
+                                return res.status(400).json({ msg: 'Ticket creado pero fallo el archivo', id: idTicket, error: errArchivo.message });
+                            }
+
+                            res.status(201).json({
+                                id: idTicket,
+                                archivoId: rowsArchivo.insertId,
+                                msg: 'Ticket y archivo ingresados correctamente'
+                            });
+                        }
+                    );
                 }
             );
-        } catch (err) {
+        } 
+        catch (err) 
+        {
             res.status(500).json(err.message);
         }
     }
