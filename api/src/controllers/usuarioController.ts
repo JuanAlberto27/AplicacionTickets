@@ -55,7 +55,7 @@ class usuarioController
         }
     };
 
-    deleteUsuario = async (req: Request, res: Response): Promise<void> => 
+    eliminarUsuario = async (req: Request, res: Response): Promise<void> => 
     {
         try 
         {

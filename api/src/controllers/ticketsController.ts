@@ -49,7 +49,7 @@ class TicketsController
         }
     };
 
-    mostrarTickets = async (req: Request, res: Response): Promise<void> => 
+    mostrarTicket = async (req: Request, res: Response): Promise<void> => 
     { 
         try 
         { 
@@ -79,7 +79,7 @@ class TicketsController
         }
     };
     
-    deleteTicket = async (req: Request, res: Response): Promise<void> => 
+    eliminarTicket = async (req: Request, res: Response): Promise<void> => 
     {
         try 
         {
