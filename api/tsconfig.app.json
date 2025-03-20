@@ -4,7 +4,8 @@
     "outDir": "../dist/out-tsc",
     "module": "commonjs",
     "types": ["node", "express"],
-    "composite": true
+    "composite": true,
+    "declaration": true
 
   },
   "include": ["src/**/*.ts"]
