@@ -6,7 +6,8 @@ const pool = require('../database/conexion.js');
 export const getArchivos = async (req: Request, res: Response): Promise<void> => { 
     try { 
         const [rows] = await pool.query('SELECT * FROM archivo');
-        return res.json(rows);
+        res.json(rows);
+        return;
     }catch (error) {
         console.error('Ha ocurrido un error al obtener los Archivos: ',error);
         res.status(500).json({message: 'Error al obtener los archivos'});
