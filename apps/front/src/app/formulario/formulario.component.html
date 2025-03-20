@@ -3,13 +3,14 @@
 
         <label for="titulo">Título</label>
         <input type="text" id="titulo" name="titulo" formControlName="titulo" required>
-        <span *ngIf="formu.get('titulo')?.invalid && formu.get('titulo')?.touched" class="error">El título es obligatorio</span>
+        <span *ngIf="formu.get('titulo')?.hasError('required') && formu.get('titulo')?.touched" class="error">El título es obligatorio</span>
+        <span *ngIf="formu.get('titulo')?.hasError('maxlength') && formu.get('titulo')?.touched" class="error">Máximo 23 caracteres permitidos</span>
 
         <br><br>
 
         <label for="descripcion">Descripción</label>
         <textarea id="descripcion" name="descripcion" formControlName="descripcion" required></textarea>
-        <span *ngIf="formu.get('descripcion')?.invalid && formu.get('descripcion')?.touched" class="error">La descripción es obligatoria</span>
+        <span *ngIf="formu.get('descripcion')?.hasError('required') && formu.get('descripcion')?.touched" class="error">La descripción es obligatoria</span>
 
         <br><br>
 
@@ -21,13 +22,13 @@
             <option value="soporte">Soporte general y consultas</option>
             <option value="seguridad">Seguridad</option>
         </select>
-        <span *ngIf="formu.get('tipo')?.invalid && formu.get('tipo')?.touched" class="error">El tipo es obligatorio</span>
+        <span *ngIf="formu.get('tipo')?.hasError('required') && formu.get('tipo')?.touched" class="error">El tipo es obligatorio</span>
 
         <br><br>
 
         <label for="fecha_fin">Fecha estimada de finalización</label>
         <input type="date" id="fecha_fin" name="fecha_fin" formControlName="fecha_fin" required>
-        <span *ngIf="formu.get('fecha_fin')?.invalid && formu.get('fecha_fin')?.touched" class="error">La fecha de fin estimada es obligatoria</span>
+        <span *ngIf="formu.get('fecha_fin')?.hasError('required') && formu.get('fecha_fin')?.touched" class="error">La fecha de fin estimada es obligatoria</span>
 
         <br><br>
 

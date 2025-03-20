@@ -1,9 +1,11 @@
 header {
-    background: linear-gradient(to right, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202) 70%);
-    padding: 10px;
-    color: rgb(5, 31, 78);
-    border: 1px solid rgb(5, 31, 78);
-    border-radius: 10px;
+    background: linear-gradient(to right, #c5fff6, #a4ffca, #cab4ca);
+    padding: 15px 25px;
+    color: #05204e;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 #contenedorBoton {

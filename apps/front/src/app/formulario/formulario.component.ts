@@ -27,6 +27,7 @@ export class FormularioComponent {
 
   enviar() {
     if (this.formu.valid) {
+      
       const ticket: Ticket = {
         titulo: this.formu.value.titulo!,
         descripcion: this.formu.value.descripcion!,
@@ -35,19 +36,21 @@ export class FormularioComponent {
         fechaFin: new Date(this.formu.value.fecha_fin!)
       };
 
-      this.ticketsService.createTicket(ticket).subscribe(
-        response => {
+      this.ticketsService.createTicket(ticket).subscribe({
+        next: () => {
           alert('Ticket creado correctamente.');
           this.formu.reset();
         },
-        error => {
+        error: (error) => {
           console.error('Error al crear el ticket:', error);
           alert('Error al crear el ticket.');
         }
-      );
+      });
+
     } else {
       this.formu.markAllAsTouched();
       alert('Revise los campos otra vez.');
     }
   }
+
 }

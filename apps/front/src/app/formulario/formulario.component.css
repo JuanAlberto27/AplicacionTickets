@@ -2,10 +2,9 @@
     text-align: center;
     height: 700px;
     background: linear-gradient(to bottom, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202));
-    margin: 0 40%;
+    margin: 4% 35%;
     border-radius: 10%;
     padding: 20px;
-    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
