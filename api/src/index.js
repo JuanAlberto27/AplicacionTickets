@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const ticketsRoutes = require('./routes/ticketsRoutes');
 const usuariosRoutes = require('./routes/usuariosRoutes');
 const archivosRoutes = require('./routes/archivosRoutes');
+
+app.use(cors());
+
 app.use(express.json());
 
 // Rutas

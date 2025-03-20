@@ -1,15 +1,16 @@
-const { err } = require('console');
 const db = require('../database/conexion.js');
 
 class usuarioController 
 {
-    constructor() {}
+    constructor() 
+    {}
 
     ingresarUsuario(req, res) 
     {
         try
         {
-            const {nombre, apellidos, correo, tipoUsuario} = req.body;
+            const { nombre, apellidos, correo, tipoUsuario } = req.body;
+
             db.query(
                 'INSERT INTO usuario (nombre, apellidos, correo, tipoUsuario) VALUES (?,?,?,?)',
                 [nombre, apellidos, correo, tipoUsuario],
@@ -17,15 +18,17 @@ class usuarioController
                 {
                     if (err) 
                     {
-                        return res.status(400).send(err);
+                        console.error('Error al insertar el usuario:', err); // Log del error en consola
+                        return res.status(400).json({ error: 'No se pudo insertar el usuario', detalle: err.message });
                     }
-                    res.status(201).json({ id: rows.insertId, msg: 'usuario ingresado' });
+                    res.status(201).json({ id: rows.insertId, msg: 'Usuario ingresado correctamente' });
                 }
-            );     
-        }
+            );
+        } 
         catch (err) 
         {
-            res.status(500).send(err);            
+            console.error('Error inesperado al ingresar el usuario:', err);
+            res.status(500).json({ error: 'Error inesperado', detalle: err.message });
         }
     }
 
@@ -37,14 +40,16 @@ class usuarioController
             {
                 if (err) 
                 {
-                    return res.status(400).json({ error: err.message });
+                    console.error('Error al mostrar los usuarios:', err);
+                    return res.status(400).json({ error: 'No se pudieron obtener los usuarios', detalle: err.message });
                 }
-                res.status(200).json({msg: 'Usuarios almacenados', tickets: rows });
+                res.status(200).json({ msg: 'Usuarios almacenados', usuarios: rows });
             });
-        }
+        } 
         catch (err) 
         {
-            res.status(500).json({ error: err.message });
+            console.error('Error inesperado al mostrar usuarios:', err);
+            res.status(500).json({ error: 'Error inesperado', detalle: err.message });
         }
     }
 
@@ -53,28 +58,27 @@ class usuarioController
         try 
         {
             const { idUsuario } = req.body;
-    
+
             db.query('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario], (err, rows) => 
             {
                 if (err) 
                 {
-                    return res.status(400).json({ error: err.message });
+                    console.error('Error al eliminar el usuario:', err);
+                    return res.status(400).json({ error: 'No se pudo eliminar el usuario', detalle: err.message });
                 }
-                else if (rows.affectedRows === 0)
+                if (rows.affectedRows === 0) 
                 {
                     return res.status(404).json({ msg: 'Usuario no encontrado' });
                 }
-                else
-                {
-                    res.status(200).json({ msg: 'Usuario eliminado' });
-                }
+                res.status(200).json({ msg: 'Usuario eliminado correctamente' });
             });
         } 
-        catch (err)
+        catch (err) 
         {
-            res.status(500).json({ error: err.message });
+            console.error('Error inesperado al eliminar el usuario:', err);
+            res.status(500).json({ error: 'Error inesperado', detalle: err.message });
         }
-    } 
+    }
 }
 
 module.exports = new usuarioController();

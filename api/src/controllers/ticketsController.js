@@ -1,9 +1,9 @@
-const { err } = require('console');
 const db = require('../database/conexion.js');
 
 class ticketsController 
 {
-    constructor() {}
+    constructor() 
+    {}
 
     ingresarTicket(req, res) 
     {
@@ -12,26 +12,25 @@ class ticketsController
             const { titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaFin, notas, archivo } = req.body;
             const fechaInicio = new Date();
 
-            // 1. Primero insertar el ticket
             db.query(
                 'INSERT INTO ticket (titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas) VALUES (?,?,?,?,?,?,?)',
                 [titulo, descripcion, tipoIncidencia, estadoTrabajo, fechaInicio, fechaFin, notas],
                 (err, rows) => 
                 {
-                    if (err)
+                    if (err) 
                     {
-                        return res.status(400).send(err);
+                        console.error('Error al insertar el ticket:', err);
+                        return res.status(400).json({ error: 'No se pudo insertar el ticket', detalle: err.message });
                     }
 
                     const idTicket = rows.insertId;
 
-                    // 2. Si no viene archivo, solo responder
+                    // Si no viene archivo, solo responder
                     if (!archivo) 
                     {
                         return res.status(201).json({ id: idTicket, msg: 'Ticket ingresado sin archivo' });
                     }
 
-                    // 3. Si viene archivo, guardarlo
                     const { nombreArchivo, urlArchivo, tipoArchivo } = archivo;
 
                     db.query(
@@ -41,7 +40,12 @@ class ticketsController
                         {
                             if (errArchivo) 
                             {
-                                return res.status(400).json({ msg: 'Ticket creado pero fallo el archivo', id: idTicket, error: errArchivo.message });
+                                console.error('Error al insertar el archivo:', errArchivo);
+                                return res.status(400).json({
+                                    msg: 'Ticket creado pero fallo el archivo',
+                                    id: idTicket,
+                                    error: errArchivo.message
+                                });
                             }
 
                             res.status(201).json({
@@ -56,10 +60,10 @@ class ticketsController
         } 
         catch (err) 
         {
-            res.status(500).json(err.message);
+            console.error('Error inesperado al ingresar el ticket:', err);
+            res.status(500).json({ error: 'Error inesperado', detalle: err.message });
         }
     }
-
 
     mostrarTickets(req, res) 
     {
@@ -69,17 +73,16 @@ class ticketsController
             {
                 if (err) 
                 {
-                    return res.status(400).json({ error: err.message });
+                    console.error('Error al mostrar los tickets:', err);
+                    return res.status(400).json({ error: 'No se pudieron obtener los tickets', detalle: err.message });
                 }
-                else
-                {
-                    res.status(200).json({ msg: 'Tickets almacenados', tickets: rows });
-                }               
+                res.status(200).json({ msg: 'Tickets almacenados', tickets: rows });
             });
-        }
+        } 
         catch (err) 
         {
-            res.status(500).json({ error: err.message });
+            console.error('Error inesperado al mostrar tickets:', err);
+            res.status(500).json({ error: 'Error inesperado', detalle: err.message });
         }
     }
 
@@ -88,28 +91,27 @@ class ticketsController
         try 
         {
             const { idTicket } = req.body;
-    
+
             db.query('DELETE FROM ticket WHERE idTicket = ?', [idTicket], (err, rows) => 
             {
                 if (err) 
                 {
-                    return res.status(400).json({ error: err.message });
+                    console.error('Error al eliminar el ticket:', err);
+                    return res.status(400).json({ error: 'No se pudo eliminar el ticket', detalle: err.message });
                 }
-                else if (rows.affectedRows === 0)
+                if (rows.affectedRows === 0) 
                 {
                     return res.status(404).json({ msg: 'Ticket no encontrado' });
                 }
-                else
-                {
-                    res.status(200).json({ msg: 'Ticket eliminado' });
-                }
+                res.status(200).json({ msg: 'Ticket eliminado correctamente' });
             });
         } 
-        catch (err)
+        catch (err) 
         {
-            res.status(500).json({ error: err.message });
+            console.error('Error inesperado al eliminar el ticket:', err);
+            res.status(500).json({ error: 'Error inesperado', detalle: err.message });
         }
-    }    
+    }
 }
 
 module.exports = new ticketsController();
