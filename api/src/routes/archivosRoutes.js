@@ -4,5 +4,4 @@ const archivoController = require('../controllers/archivoController');
 
 router.post('/crearArchivo', archivoController.ingresar);
 
-
 module.exports = router;
