@@ -1,7 +1,7 @@
 #formulario {
     text-align: center;
     height: 700px;
-    background: linear-gradient(to bottom, rgb(197, 255, 246), rgb(164, 255, 202), rgb(202, 180, 202));
+    background: linear-gradient(to bottom, rgb(114, 143, 255), rgb(224, 194, 224));
     margin: 4% 35%;
     border-radius: 10%;
     padding: 20px;
@@ -13,12 +13,13 @@
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 
 #botonEnviar {
     background-color: rgb(255, 255, 255);
-    border-radius: 30%;
+    border-radius: 30px;
     padding: 12px;
     box-shadow: 10px 0px 50px rgb(119, 141, 131);
     color: black;

@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(to bottom, rgb(114, 143, 255), rgb(224, 194, 224));
+    padding: 15px 25px;
+    color: #05204e;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+#tickets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 20px;
+}
+
+.ticket-card {
+    background-color: rgb(155, 175, 255);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 350px;
+    transition: transform 0.3s ease-in-out;
+    color: rgb(0, 0, 0);
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.titulo {
+    font-size: 20px;
+    margin: 0;
+}
+
+.estado {
+    font-size: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.pendiente { background-color: #ff9800; }
+.en-progreso { background-color: #2196f3; }
+.completado { background-color: #4caf50; }
+
+.descripcion {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 15px;
+    margin: 5px 0;
+}
