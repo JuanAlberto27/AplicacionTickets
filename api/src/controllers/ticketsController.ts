@@ -13,18 +13,15 @@ class TicketsController
         {
             const { archivo: archivoData, ...ticketData } = req.body;
 
-            // Insertar ticket
             const [result] = await pool.promise().query('INSERT INTO ticket SET ?', [ticketData]);
             const idTicket = result.insertId;
 
-            // Si no hay archivo, responder directamente
             if (!archivoData) 
             {
                 res.status(201).json({ message: 'Ticket creado sin archivo', idTicket });
                 return;
             }
 
-            // Insertar archivo relacionado
             const newArchivo: archivo = 
             {
                 ...archivoData,

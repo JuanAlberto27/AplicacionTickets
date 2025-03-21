@@ -17,25 +17,26 @@ app.use('/tickets', ticketsRoutes);
 app.use('/archivos', archivosRoutes);
 app.use('/usuarios', usuariosRoutes);
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => 
+{
     res.json({ message: 'Bienvenido a la API de Tickets',
-                endpoints: [{tickets:{
+                endpoints: [{tickets:
+                {
                     base: '/tickets',
                     oparations:[
-                        {method: 'POST', path: '/crearTicket', description: 'Crea un ticket'},
-                        {method: 'GET', path: '/mostrarTickets', description: 'Muestra todos los tickets'},
-                        {method: 'GET', path: '/mostrarTicket/:id', description: 'Muestra un ticket por su id'},
-                        {method: 'PUT', path: '/actualizarTicket/:id', description: 'Actualiza un ticket por su id'},
+                        {method: 'POST', path: '/ingresarTicket', description: 'Crea un ticket'},
+                        {method: 'GET', path: '/mostrarTicket', description: 'Muestra todos los tickets'},
+                        {method: 'PUT', path: '/modificarTicket/:id', description: 'Actualiza un ticket por su id'},
                         {method: 'DELETE', path: '/eliminarTicket/:id', description: 'Elimina un ticket por su id'}
                     ]
                 },
-                usuario:{
+                usuario:
+                {
                     base: '/usuarios',
                     oparations:[
-                        {method: 'POST', path: '/crearUsuario', description: 'Crea un usuario'},
+                        {method: 'POST', path: '/ingresarUsuario', description: 'Crea un usuario'},
                         {method: 'GET', path: '/mostrarUsuarios', description: 'Muestra todos los usuarios'},
-                        {method: 'GET', path: '/mostrarUsuario/:id', description: 'Muestra un usuario por su id'},
-                        {method: 'PUT', path: '/actualizarUsuario/:id', description: 'Actualiza un usuario por su id'},
+                        {method: 'PUT', path: '/modificarUsuario/:id', description: 'Actualiza un usuario por su id'},
                         {method: 'DELETE', path: '/eliminarUsuario/:id', description: 'Elimina un usuario por su id'}
                     ]
                 },
@@ -44,8 +45,10 @@ app.get('/', (req, res) => {
     })
 });
 
-app.use({_req: Request, res: Response, next: NextFunction} => {
+app.use((req , res , next) => 
+{
     res.status(404).json({ message: 'Ruta no encontrada' });
 });
 
 export default app;
+
