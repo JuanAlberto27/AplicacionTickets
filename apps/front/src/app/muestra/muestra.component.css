@@ -34,7 +34,7 @@ header {
 }
 
 .ticket-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
 }
 
 .ticket-header {
@@ -68,4 +68,21 @@ header {
 .info p {
     font-size: 15px;
     margin: 5px 0;
+}
+
+#botonArchivo{
+    cursor: pointer;
+    margin-top: 15px;
+    background-color: rgb(214, 222, 255);
+    border-radius: 20px;
+    padding: 6px;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+#botonArchivo:hover{
+    background-color: rgb(229, 235, 255);
+    transform: scale(1.05);
+    transition: 500ms ease-in-out;
 }
